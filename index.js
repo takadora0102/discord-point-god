@@ -1,4 +1,4 @@
-// 🔧 全機能統合：登録・借金・返済・ショップ・ポイント・プロフィール・ランキング・ニックネーム変更
+// 🔧 全機能統合：登録・借金・返済・ショップ・ポイント・プロフィール・ランキング・ニックネーム変更 + Render対応Webサーバー
 const { Client, GatewayIntentBits, Partials, SlashCommandBuilder, REST, Routes, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const fs = require('fs');
 require('dotenv').config();
@@ -170,3 +170,10 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(TOKEN);
+
+// 🌐 Render対策：Expressでポートを開くダミーWebサーバー
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+app.get('/', (req, res) => res.send('Bot is running.'));
+app.listen(PORT, () => console.log(`🌐 Web server listening on port ${PORT}`));
